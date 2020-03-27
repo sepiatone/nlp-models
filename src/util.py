@@ -41,6 +41,21 @@ def read_vocab_file(filename):
   with open(filename, "r") as f:
     return [line.strip() for line in f]
   
+
+MAX_SENT_LENGTH = 48
+MAX_SENT_LENGTH_PLUS_SOS_EOS = 50
+
+# We only keep sentences that do not exceed 48 words, so that later when we add <s> and </s> to a sentence it still won't exceed 50 words.
+def filter_data(src_sentences_list, trg_sentences_list, max_len):
+  new_src_sentences_list, new_trg_sentences_list = [], []
+  
+  for src_sent, trg_sent in zip(src_sentences_list, trg_sentences_list):
+    if (len(src_sent) <= max_len and len(trg_sent) <= max_len and len(src_sent) > 0 and len(trg_sent)) > 0:
+      new_src_sentences_list.append(src_sent)
+      new_trg_sentences_list.append(trg_sent)
+  
+  return new_src_sentences_list, new_trg_sentences_list
+  
   
 """
 used to load the dataset. the class MTDataset is built on top of the data loader api provided by pytorch
