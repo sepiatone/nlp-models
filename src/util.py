@@ -46,7 +46,7 @@ MAX_SENT_LENGTH = 48
 MAX_SENT_LENGTH_PLUS_SOS_EOS = 50
 
 # We only keep sentences that do not exceed 48 words, so that later when we add <s> and </s> to a sentence it still won't exceed 50 words.
-def filter_data(src_sentences_list, trg_sentences_list, max_len):
+def filter_data(src_sentences_list, trg_sentences_list, max_len = MAX_SENT_LENGTH):
   new_src_sentences_list, new_trg_sentences_list = [], []
   
   for src_sent, trg_sent in zip(src_sentences_list, trg_sentences_list):
@@ -77,12 +77,12 @@ EOS_INDEX = 3
 
 class MTDataset(data.Dataset):
   def __init__(self, src_sentences, src_vocabs, trg_sentences, trg_vocabs,
-               sampling=1.):
+               sampling=1., max_seq_length = MAX_SENT_LENGTH_PLUS_SOS_EOS):
     self.src_sentences = src_sentences[:int(len(src_sentences) * sampling)]
     self.trg_sentences = trg_sentences[:int(len(src_sentences) * sampling)]
 
-    self.max_src_seq_length = MAX_SENT_LENGTH_PLUS_SOS_EOS
-    self.max_trg_seq_length = MAX_SENT_LENGTH_PLUS_SOS_EOS
+    self.max_src_seq_length = max_seq_length
+    self.max_trg_seq_length = max_seq_length
 
     self.src_vocabs = src_vocabs
     self.trg_vocabs = trg_vocabs
