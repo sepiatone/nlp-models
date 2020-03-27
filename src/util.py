@@ -45,6 +45,8 @@ def read_vocab_file(filename):
 """
 used to load the dataset. the class MTDataset is built on top of the data loader api provided by pytorch
 """
+from torch.utils import data
+
 seed = 42
 np.random.seed(seed)
 torch.manual_seed(seed)
