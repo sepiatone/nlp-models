@@ -119,6 +119,8 @@ class MTDataset(data.Dataset):
     return torch.tensor(src_id), src_len, torch.tensor(trg_id), trg_len
 
   
+import torch.nn.functional as F
+
 class SimpleLossCompute:
   """A simple loss compute and train function."""
 
