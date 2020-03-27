@@ -23,3 +23,18 @@ def get_dataset(dataset):
 
   else:
     print("incorrect dataset specified")
+    
+
+def read_sentence_file(filename):
+  sentences_list = []
+  
+  with open(filename, "r") as f:      
+    for line in f:
+      sentences_list.append(line.strip().split())
+  
+  return sentences_list
+
+
+def read_vocab_file(filename):
+  with open(filename, "r") as f:
+    return [line.strip() for line in f]
