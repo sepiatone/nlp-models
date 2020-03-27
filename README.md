@@ -1,5 +1,5 @@
 #### Overview
-A testbed to explore various models / algorithms used to solve Natural Language Processing problems.
+A testbed to explore various models / algorithms used to solve Natural Language Processing tasks.
 
 * RNNs
 * LSTMs
