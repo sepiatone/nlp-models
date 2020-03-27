@@ -5,6 +5,7 @@ utility functions used across models
 
 import os
 import numpy as np
+import torch
 
 
 def get_dataset(dataset):
