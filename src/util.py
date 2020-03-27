@@ -4,6 +4,7 @@ utility functions used across models
 
 
 import os
+import numpy as np
 
 
 def get_dataset(dataset):
