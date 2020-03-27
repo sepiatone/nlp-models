@@ -4,6 +4,12 @@ utility functions used across models
 
 
 def get_dataset(dataset):
+  try:
+    dir_data = "../data"
+    os.makedirs(dir_data, exist_ok = False)
+  except OSError:
+    print("data directory already present")
+  
   if dataset == "en_vi_iwslt_15":
     os.system("wget -nv -O ../data/train.en https://nlp.stanford.edu/projects/nmt/data/iwslt15.en-vi/train.en")
     os.system("wget -nv -O ../data/train.vi https://nlp.stanford.edu/projects/nmt/data/iwslt15.en-vi/train.vi")
