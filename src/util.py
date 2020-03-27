@@ -3,6 +3,9 @@ utility functions used across models
 """
 
 
+import os
+
+
 def get_dataset(dataset):
   try:
     dir_data = "../data"
