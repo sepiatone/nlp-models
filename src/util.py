@@ -140,3 +140,11 @@ class SimpleLossCompute:
       self.opt.zero_grad()
 
     return loss.data.item() * norm
+
+
+def plot_perplexity(perplexities):
+  fig, ax = plt.subplots()
+  ax.plot(perplexities)
+  ax.set_xlabel("Epoch")
+  ax.set_ylabel("Perplexity")
+  ax.set_title("Perplexity per Epoch");
