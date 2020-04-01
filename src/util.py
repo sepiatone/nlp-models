@@ -27,20 +27,76 @@ def get_dataset(dataset):
     print("incorrect dataset specified")
     
 
-def read_sentence_file(filename):
-  sentences_list = []
+# read in a text file
+# if the type is "sentence", return a list of sentences, if the type is "word" return a list of lists (words in sentences)
+def read_file_txt(filename, encoding = "utf-8", type = "sentence"):
+  bindings = -1
+  l_sentence = []
   
-  with open(filename, "r") as f:      
+  with open(filename, "r", bindings, encoding) as f:      
     for line in f:
-      sentences_list.append(line.strip().split())
+      if type == "word":
+        l_sentence.append(line.strip().split())
+      elif type == "sentence":
+        l_sentence.append(line.strip())
+      else:
+        print("unknown type")
+        break
   
-  return sentences_list
+  return l_sentence
 
 
 def read_vocab_file(filename):
   with open(filename, "r") as f:
     return [line.strip() for line in f]
+
+
+"""
+prepare an one hot encoding of the items in obj
+obj - list of items whose one hot encoding is to be prepared
+vocab2id - ids of all items in the vocabulary
+vocabulary - the vocabulary
+
+returns a one hot vector of the items in obj
+"""
+def one_hot_encoding(obj, vocab2id, vocabulary, unk = "UNK"):
+    # Example input `sent` (a list of words):
+    # ['2', 'start', 'restaurants', 'with', 'inside', 'dining']
+
+    one_hot = torch.zeros(len(obj), len(vocab2id))
+    
+    # list_words = [word for word in sent]
+
+    for idx in range(len(obj)):
+        if obj[idx] not in vocabulary:
+            obj[idx] = unk
+            
+        one_hot[idx][vocab2id[obj[idx]]] = 1        
+
+    return one_hot
   
+
+"""
+convert the items in obj to indexes
+obj - list of items which have to be converted to indexes
+obj2idx - indexes of all items in the vocabulary
+
+returns a list of indexes corresponding to the items in obj
+"""
+def encoding_idx(obj, tag2id):
+    l_idx = torch.zeros(len(obj), dtype = torch.long)
+       
+    list_tags = [tag for tag in obj]
+
+
+    # print(id_seq.shape, len(list_tags))
+    
+    for idx in range(len(obj)):
+        l_idx[idx] = tag2id[list_tags[idx]]
+        assert  list_tags[idx] == obj[idx]
+
+    return l_idx
+
 
 MAX_SENT_LENGTH = 48
 MAX_SENT_LENGTH_PLUS_SOS_EOS = 50
