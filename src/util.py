@@ -60,12 +60,7 @@ vocabulary - the vocabulary
 returns a one hot vector of the items in obj
 """
 def one_hot_encoding(obj, vocab2id, vocabulary, unk = "UNK"):
-    # Example input `sent` (a list of words):
-    # ['2', 'start', 'restaurants', 'with', 'inside', 'dining']
-
     one_hot = torch.zeros(len(obj), len(vocab2id))
-    
-    # list_words = [word for word in sent]
 
     for idx in range(len(obj)):
         if obj[idx] not in vocabulary:
@@ -81,19 +76,13 @@ convert the items in obj to indexes
 obj - list of items which have to be converted to indexes
 obj2idx - indexes of all items in the vocabulary
 
-returns a list of indexes corresponding to the items in obj
+returns a list of tensors - indexes corresponding to the items in obj
 """
 def encoding_idx(obj, tag2id):
     l_idx = torch.zeros(len(obj), dtype = torch.long)
-       
-    list_tags = [tag for tag in obj]
-
-
-    # print(id_seq.shape, len(list_tags))
     
     for idx in range(len(obj)):
-        l_idx[idx] = tag2id[list_tags[idx]]
-        assert  list_tags[idx] == obj[idx]
+        l_idx[idx] = tag2id[obj[idx]]
 
     return l_idx
 
