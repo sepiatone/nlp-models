@@ -4,7 +4,13 @@ utility functions used across models
 
 
 import os
+import math
+import time
+
 import numpy as np
+import sklearn
+from sklearn.metrics import precision_recall_fscore_support
+
 import torch
 
 
@@ -193,3 +199,25 @@ def plot_perplexity(perplexities):
   ax.set_xlabel("Epoch")
   ax.set_ylabel("Perplexity")
   ax.set_title("Perplexity per Epoch");
+
+
+def time_since(since):
+  now = time.time()
+  s = now - since
+  m = math.floor(s / 60)
+  s -= m * 60
+  return '%dm %ds' % (m, s)
+
+
+def evaluate_result(true_tag_list, predicted_tag_list):
+  l_p = []
+  l_r = []
+  l_f1 = []
+    
+  for true_tag, predicted_tag in zip(true_tag_list, predicted_tag_list):
+    p, r, f1, _ = precision_recall_fscore_support(true_tag, predicted_tag, average='macro', zero_division=0)
+    l_p.append(p)
+    l_r.append(r)
+    l_f1.append(f1)
+    
+  return np.mean(l_p), np.mean(l_r), np.mean(l_f1)
