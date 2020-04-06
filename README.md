@@ -1,7 +1,7 @@
 #### Overview
 A testbed to explore various models / algorithms used to solve Natural Language Processing tasks.
 
-* RNNs
-* LSTMs
-* Sequence-to-sequence models without attention for machine translation
-* Sequence-to-sequence models with attention for machine translation
+* Named Entity Recognition using RNNs
+* Named Entity Recognition using LSTMs
+* Machine Translation using Sequence-to-sequence models (without attention mechanism)
+* Machine Translation using Sequence-to-sequence models (with attention mechanism)
