@@ -11,7 +11,10 @@ import numpy as np
 import sklearn
 from sklearn.metrics import precision_recall_fscore_support
 
+import matplotlib.pyplot as plt
+
 import torch
+import torch.nn as nn
 
 
 def get_dataset(dataset):
@@ -50,11 +53,6 @@ def read_file_txt(filename, encoding = "utf-8", type = "sentence"):
         break
   
   return l_sentence
-
-
-def read_vocab_file(filename):
-  with open(filename, "r") as f:
-    return [line.strip() for line in f]
 
 
 """
@@ -175,10 +173,12 @@ import torch.nn.functional as F
 class SimpleLossCompute:
   """A simple loss compute and train function."""
 
-  def __init__(self, generator, criterion, opt = None):
-    self.generator = generator
+  def __init__(self, model, criterion, opt = None):
+    self.model = model
+    self.generator = self.model.generator
     self.criterion = criterion
     self.opt = opt
+    self.grad_clip = 1
 
   def __call__(self, x, y, norm):
     x = self.generator(x)
@@ -188,6 +188,7 @@ class SimpleLossCompute:
     if self.opt is not None:  # training mode
       loss.backward()          
       self.opt.step()
+      nn.utils.clip_grad_norm_(self.model.parameters(), self.grad_clip)
       self.opt.zero_grad()
 
     return loss.data.item() * norm
