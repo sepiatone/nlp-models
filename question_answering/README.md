@@ -4,7 +4,7 @@ Implementation of a Question Answering (qa) system. Inspired by the [Information
 
 This [paper](https://link.springer.com/article/10.1007%2Fs10844-019-00584-7) gives a good overview of qa systems.
 
-![alt text](https://github.com/sepiatone/nlp-models/tree/master/question_answering/tmp-qa_system.png "Question Answering System")
+![alt text](https://github.com/sepiatone/nlp-models/blob/master/question_answering/tmp-qa_system.png "Question Answering System")
 
 to_do
 1. Create own images
