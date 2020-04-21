@@ -6,3 +6,4 @@ A testbed to explore various models / algorithms used to solve Natural Language 
 * Machine Translation using Sequence-to-sequence models (without attention mechanism)
 * Machine Translation using Sequence-to-sequence models (with attention mechanism)
 * Question Answering
+* Spoken Language Understanding
