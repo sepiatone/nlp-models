@@ -1,1 +1,0 @@
-how long will it take to drive from chicago to mississippi	[IN:GET_ESTIMATED_DURATION how [SUB long [SUB will [SUB it [SUB take [SUB to [SUB [SL:METHOD_TRAVEL drive ] [SUB from [SUB [SL:SOURCE chicago ] [SUB to [SL:DESTINATION mississippi ] ] ] ] ] ] ] ] ] ] ]
